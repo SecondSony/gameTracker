@@ -14,7 +14,4 @@ public class Url {
 
     @Column(name = "url")
     private String url;
-
-    @Column(name = "user")
-    private long user;
 }

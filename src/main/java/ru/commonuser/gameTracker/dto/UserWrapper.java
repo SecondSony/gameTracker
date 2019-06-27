@@ -36,7 +36,7 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
 
     @NotNull
     @Size(max = 256)
-    private String mail;
+    private String email;
 
     @JsonIgnore
     @Size(min = 8, max = 20)
@@ -71,7 +71,7 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
             surname = item.getSurname();
             secondName = item.getSecondName();
             login = item.getLogin();
-            mail=item.getEmail();
+            email=item.getEmail();
             password = item.getPassword();
             dateLastOnline = item.getDateLastOnline();
             dateOpen = item.getDateCreate();
@@ -87,7 +87,7 @@ public class UserWrapper implements ObjectWrapper<User>, Serializable
             item.setLogin(login);
             item.setRole(role);
             item.setStatus(status);
-            item.setEmail(mail);
+            item.setEmail(email);
             item.setName(name);
             item.setSurname(surname);
             item.setSecondName(secondName);

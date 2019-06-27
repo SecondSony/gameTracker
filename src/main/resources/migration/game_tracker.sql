@@ -1,4 +1,4 @@
-create table users
+CREATE TABLE users
 (
   id                BIGINT AUTO_INCREMENT NOT NULL,
   surname           CHARACTER VARYING NOT NULL,
@@ -15,13 +15,11 @@ create table users
   PRIMARY KEY (id)
 );
 
-create table urls
+CREATE TABLE urls
 (
   id    BIGINT AUTO_INCREMENT NOT NULL,
   url   CHARACTER VARYING NOT NULL UNIQUE,
-  user  BIGINT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (user) REFERENCES users (id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE permissions
@@ -31,3 +29,7 @@ CREATE TABLE permissions
   role   CHARACTER VARYING NOT NULL,
   PRIMARY KEY (id)
 );
+
+INSERT INTO users(surname, name, second_name, login, password, email, date_create, role, status)
+VALUES('Админ', 'Администратор', 'Администратович', 'root', '$2a$10$LijUmixpYL0i9rRvwXrnX.heUijboQzE3PsoCrxuJANIDVX28FNjS',
+       'root@email', CURRENT_TIMESTAMP, 'ROLE_ADMIN', 'ACTIVE')
