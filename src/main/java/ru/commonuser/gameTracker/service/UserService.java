@@ -25,10 +25,11 @@ import ru.commonuser.gameTracker.utils.CredentialsUtil;
 
 import java.rmi.ServerException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Service
-@Transactional(rollbackFor = ServerException.class)
+@Transactional(rollbackFor = ServersException.class)
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PermissionRepository permissionRepository;
@@ -227,5 +228,38 @@ public class UserService implements UserDetailsService {
         } catch (Exception ex){
             throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
         }
+    }
+
+    /**
+     * Удаляет информацию о пользователе
+     * @param id идентификатор
+     * @throws ServersException
+     */
+    public void delete(Long id) throws ServersException{
+        try {
+            User user = getUser(id);
+            userRepository.delete(user);
+        } catch (ServersException ex) {
+            throw ex;
+        } catch (Exception ex){
+            // TODO:
+            throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
+        }
+    }
+
+    /**
+     * Удаляет все информации о пользователе
+     * @throws ServersException
+     */
+    public void deleteAll() {
+        userRepository.deleteAll();
+    }
+
+    /**
+     * Получает все информации о ссылке
+     * @return Список ссылок
+     */
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

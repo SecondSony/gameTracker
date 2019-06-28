@@ -10,7 +10,10 @@ import javax.persistence.*;
 public class Url {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "url")
     private String url;

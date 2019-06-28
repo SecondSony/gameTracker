@@ -31,7 +31,7 @@ public class ErrorCodeConstants {
     public static final ErrorCodeIdentifier USER_UNBLOCK_ERROR = USER.branch("7");
 
     static {
-        messages.put(DATA_NOT_FOUND, "Ошибка при получении реестра ldap-серверов");
+        messages.put(DATA_NOT_FOUND, "Ошибка при получении данных");
         messages.put(ACCESS_ERROR, "Доступ запрещен");
         messages.put(DATA_VALIDATE_ERROR, "Отправленные данные некорректны");
 
