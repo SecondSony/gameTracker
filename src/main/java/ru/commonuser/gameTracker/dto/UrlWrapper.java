@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 
 @Data
 public class UrlWrapper implements ObjectWrapper<Url> {
-    @Size(min = 1)
     private Long id;
 
     @NotNull
@@ -19,6 +18,15 @@ public class UrlWrapper implements ObjectWrapper<Url> {
     @Size(max = 100)
     private String url;
 
+    @NotNull
+    private Boolean isAuth;
+
+    @Size(max = 100)
+    private String login;
+
+    @Size(max = 100)
+    private String password;
+
     public UrlWrapper() {
 
     }
@@ -28,12 +36,17 @@ public class UrlWrapper implements ObjectWrapper<Url> {
         id = item.getId();
         name = item.getName();
         url = item.getUrl();
+        isAuth = item.getIsAuth();
+        login = item.getLogin();
+        password = item.getPassword();
     }
 
     @Override
     public void fromWrapper(Url item) {
-        item.setId(id);
         item.setName(name);
         item.setUrl(url);
+        item.setIsAuth(isAuth);
+        item.setLogin(login);
+        item.setPassword(password);
     }
 }

@@ -40,7 +40,6 @@ public class UrlService {
         } catch (ServersException ex) {
             throw ex;
         } catch (Exception ex){
-            // TODO:
             throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
         }
     }
@@ -59,7 +58,6 @@ public class UrlService {
         } catch (ServersException ex) {
             throw ex;
         } catch (Exception ex){
-            // TODO:
             throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
         }
     }
@@ -68,7 +66,7 @@ public class UrlService {
      * Получает ссылку url по id
      * @param id идентификатор
      * @return Сущность url
-     * @throws ServersException
+     * @throws ServersException Ошибка на сервере
      */
     public Url getUrl(Long id) throws ServersException {
         return urlRepository.findFirstById(id)
@@ -78,7 +76,7 @@ public class UrlService {
     /**
      * Удаляет все информации о ссылке
      * @param id идентификатор
-     * @throws ServersException
+     * @throws ServersException Ошибка на сервере
      */
     public void delete(Long id) throws ServersException{
         try {
@@ -87,14 +85,12 @@ public class UrlService {
         } catch (ServersException ex) {
             throw ex;
         } catch (Exception ex){
-            // TODO:
             throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
         }
     }
 
     /**
      * Удаляет информацию о ссылке
-     * @throws ServersException
      */
     public void deleteAll() {
         urlRepository.deleteAll();
@@ -106,5 +102,14 @@ public class UrlService {
      */
     public List<Url> getAll() {
         return urlRepository.findAll();
+    }
+
+    /**
+     * Проверяет ссылку на необходимость авторизации
+     * @return Подтверждение на авторизацию
+     */
+    public Boolean isAuth(Long id) throws ServersException {
+        Url url = getUrl(id);
+        return url.getIsAuth();
     }
 }

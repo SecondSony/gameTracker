@@ -49,4 +49,9 @@ public class UrlRestController {
     public void deleteAll() {
         urlService.deleteAll();
     }
+
+    @GetMapping("/{id}")
+    public boolean isAuth(@PathVariable("id") Long id) throws ServersException {
+        return urlService.isAuth(id);
+    }
 }

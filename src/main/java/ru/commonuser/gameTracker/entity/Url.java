@@ -17,4 +17,13 @@ public class Url {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "is_auth")
+    private Boolean isAuth;
+
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
 }
