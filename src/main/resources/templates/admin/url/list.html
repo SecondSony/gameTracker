@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sd="http://www.thymeleaf.org/spring-data"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head(~{::title}, ~{::link}, ~{::script})">
+    <title>Список ссылок</title>
+    <script th:src="@{/static/lib/floatThead/jquery.floatThead.min.js}"></script>
+</head>
+<body class="bg-secondary">
+    <header th:replace="fragments/header :: header()"></header>
+    <div class="container my-2">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Название сайта</th>
+                <th>Ссылка</th>
+                <th>Авторизация</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white">
+            <tr th:each="url : ${urls}" th:onclick="'request(\'' + @{|/admin/urls/${url.id}|}+ '\');'">
+                <td th:text="${url.name}"></td>
+                <td th:text="${url.url}"></td>
+                <td th:text="${url.isAuth}"></td>
+                <td th:text="${url.login}"></td>
+                <td th:text="${url.password}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

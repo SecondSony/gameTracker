@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "admin/urls")
+@RequestMapping(value = "admin/rest_urls")
 public class UrlRestController {
     private final UrlService urlService;
 
@@ -35,22 +35,22 @@ public class UrlRestController {
         urlService.add(urlWrapper);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/edit")
     public void edit(@RequestBody UrlWrapper urlWrapper) throws ServersException {
         urlService.edit(urlWrapper);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public void delete(@PathVariable("id") Long id) throws ServersException {
         urlService.delete(id);
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/deleteAll")
     public void deleteAll() {
         urlService.deleteAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/getIsAuth")
     public boolean isAuth(@PathVariable("id") Long id) throws ServersException {
         return urlService.isAuth(id);
     }

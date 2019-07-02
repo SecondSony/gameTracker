@@ -9,6 +9,7 @@ import ru.commonuser.gameTracker.exception.error.ErrorCodeConstants;
 import ru.commonuser.gameTracker.exception.error.ErrorInformationBuilder;
 import ru.commonuser.gameTracker.repository.UrlRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -111,5 +112,18 @@ public class UrlService {
     public Boolean isAuth(Long id) throws ServersException {
         Url url = getUrl(id);
         return url.getIsAuth();
+    }
+
+    public List<UrlWrapper> getListUrl() {
+        ArrayList<UrlWrapper> urlList = new ArrayList<>();
+        List<Url> urls = getAll();
+
+        for (Url url : urls) {
+            UrlWrapper item = new UrlWrapper();
+            item.toWrapper(url);
+            urlList.add(item);
+        }
+
+        return urlList;
     }
 }

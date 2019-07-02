@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "admin/users")
+@RequestMapping(value = "admin/rest_users")
 public class UserRestController {
     private final UserService userService;
 

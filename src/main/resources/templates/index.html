@@ -4,12 +4,12 @@
 <head th:replace="fragments/head :: head(~{::title}, ~{::link}, ~{::script})">
     <title>GameTracker</title>
 </head>
-<body>
+<body class="bg-secondary">
     <header th:replace="fragments/header :: header()"></header>
     <div class="container my-2">
-        <form id="searcher" class="form-group row mx-1">
+        <form id="searcher" class="form-group row mx-0">
             <input class="form-control col-md-10" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success col-md-2" type="submit">Поиск</button>
+            <button class="btn btn-info col-md-2" type="submit">Поиск</button>
         </form>
     </div>
 </body>

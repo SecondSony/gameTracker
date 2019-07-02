@@ -4,7 +4,7 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <header th:fragment="header()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="/static/img/favicon.ico" alt="logo"></a>
+        <a class="navbar-brand" href="/"><img src="/static/img/favicon.ico" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,19 +12,22 @@
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link active" href="#">GameTracker</a>
+                    <a class="nav-link active" href="/">GameTracker</a>
                 </li>
 
                 <!-- Пользователи -->
+                <!--<li class="nav-item" sec:authorize="!hasRole('ROLE_ANONYMOUS')">-->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Пользователи</a>
+                    <a class="nav-link" th:href="@{/admin/users}">Пользователи</a>
                 </li>
 
                 <!-- Ссылки -->
+                <!--<li class="nav-item" sec:authorize="!hasRole('ROLE_ANONYMOUS')">-->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ссылки</a>
+                    <a class="nav-link" th:href="@{/admin/urls}">Ссылки</a>
                 </li>
 
+                <!--<li class="nav-item" sec:authorize="!hasRole('ROLE_ANONYMOUS')">-->
                 <li class="nav-item">
                     <a class="nav-link" href="/swagger-ui.html">Swagger</a>
                 </li>
