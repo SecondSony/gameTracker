@@ -29,9 +29,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "")
-    public ModelAndView list(Pageable pageable, UserFilterWrapper filterUserWrapper) throws ServersException, java.rmi.ServerException {
+    public ModelAndView list(Pageable pageable, UserFilterWrapper filterUserWrapper) throws ServersException {
         ModelAndView usersPage = new ModelAndView(USER_VIEWS_PATH + "list");
-        usersPage.addObject("filter", filterUserWrapper);
+        // usersPage.addObject("users", userService.getAll());
         usersPage.addObject("page", userService.getPageByFilter(pageable, filterUserWrapper));
         prepareUserModelAndView(usersPage);
         return usersPage;

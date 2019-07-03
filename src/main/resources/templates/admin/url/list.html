@@ -21,11 +21,11 @@
             </thead>
             <tbody class="bg-white">
             <tr th:each="url : ${urls}" th:onclick="'request(\'' + @{|/admin/urls/${url.id}|}+ '\');'">
-                <td th:text="${url.name}"></td>
-                <td th:text="${url.url}"></td>
-                <td th:text="${url.isAuth}"></td>
-                <td th:text="${url.login}"></td>
-                <td th:text="${url.password}"></td>
+                <td th:utext="${url.name}"></td>
+                <td th:utext="${url.url}"></td>
+                <td th:utext="${url.isAuth}"></td>
+                <td th:utext="${url.login}"></td>
+                <td th:utext="${url.password}"></td>
             </tr>
             </tbody>
         </table>

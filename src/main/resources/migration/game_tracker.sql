@@ -3,7 +3,7 @@ CREATE TABLE users
   id                BIGINT AUTO_INCREMENT NOT NULL,
   surname           CHARACTER VARYING NOT NULL,
   name              CHARACTER VARYING NOT NULL,
-  second_name       CHARACTER VARYING NOT NULL,
+  second_name       CHARACTER VARYING,
   login             CHARACTER VARYING NOT NULL UNIQUE,
   password          CHARACTER VARYING NOT NULL,
   email             CHARACTER VARYING NOT NULL,

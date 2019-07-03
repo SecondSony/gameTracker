@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sd="http://www.thymeleaf.org/spring-data"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head(~{::title}, ~{::link}, ~{::script})">
+    <title>Список пользователей</title>
+    <script th:src="@{/static/lib/floatThead/jquery.floatThead.min.js}"></script>
 </head>
-<body>
-
+<body class="bg-secondary">
+<header th:replace="fragments/header :: header()"></header>
+<div class="container my-2">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>ФИО</th>
+            <th>Логин</th>
+            <th>Почта</th>
+            <th>Последняя активность</th>
+            <th>Роль</th>
+            <th>Статус</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white">
+        <tr th:each="user : ${page}" th:onclick="'request(\'' + @{|/admin/users/${user.id}|}+ '\');'">
+            <td th:utext="${user.getFio()}"></td>
+            <td th:utext="${user.login}"></td>
+            <td th:utext="${user.email}"></td>
+            <td th:utext="|${#dates.format(user.dateLastOnline,'dd.MM.yyyy HH:mm')}|"></td>
+            <td th:utext="${user.role != null ? user.role.getStringName() : ''}"></td>
+            <td th:utext="${user.status.getStringName()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
