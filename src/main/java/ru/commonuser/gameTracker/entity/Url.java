@@ -18,6 +18,12 @@ public class Url {
     @Column(name = "url")
     private String url;
 
+    @Column(name = "url_pattern")
+    private String urlPattern;
+
+    @Column(name = "css_pattern")
+    private String cssPattern;
+
     @Column(name = "is_auth")
     private Boolean isAuth;
 

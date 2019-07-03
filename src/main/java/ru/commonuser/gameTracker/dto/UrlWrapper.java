@@ -19,6 +19,14 @@ public class UrlWrapper implements ObjectWrapper<Url> {
     private String url;
 
     @NotNull
+    @Size(max = 100)
+    private String urlPattern;
+
+    @NotNull
+    @Size(max = 100)
+    private String cssPattern;
+
+    @NotNull
     private Boolean isAuth;
 
     @Size(max = 100)
@@ -40,6 +48,8 @@ public class UrlWrapper implements ObjectWrapper<Url> {
         id = item.getId();
         name = item.getName();
         url = item.getUrl();
+        urlPattern = item.getUrlPattern();
+        cssPattern = item.getCssPattern();
         isAuth = item.getIsAuth();
         login = item.getLogin();
         password = item.getPassword();
@@ -53,6 +63,8 @@ public class UrlWrapper implements ObjectWrapper<Url> {
     public void fromWrapper(Url item) {
         item.setName(name);
         item.setUrl(url);
+        item.setUrlPattern(urlPattern);
+        item.setCssPattern(cssPattern);
         item.setIsAuth(isAuth);
         item.setLogin(login);
         item.setPassword(password);

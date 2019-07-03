@@ -9,7 +9,7 @@
 <body class="bg-secondary">
     <header th:replace="fragments/header :: header()"></header>
     <div class="container my-2">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-sm">
             <thead class="thead-dark">
             <tr>
                 <th>Название сайта</th>
@@ -22,7 +22,7 @@
             <tbody class="bg-white">
             <tr th:each="url : ${urls}" th:onclick="'request(\'' + @{|/admin/urls/${url.id}|}+ '\');'">
                 <td th:utext="${url.name}"></td>
-                <td th:utext="${url.url}"></td>
+                <td><a th:href="@{${url.url}}" th:utext="${url.url}"></a></td>
                 <td th:utext="${url.isAuth}"></td>
                 <td th:utext="${url.login}"></td>
                 <td th:utext="${url.password}"></td>

@@ -9,7 +9,7 @@
 <body class="bg-secondary">
 <header th:replace="fragments/header :: header()"></header>
 <div class="container my-2">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-sm">
         <thead class="thead-dark">
         <tr>
             <th>ФИО</th>
@@ -21,8 +21,8 @@
         </tr>
         </thead>
         <tbody class="bg-white">
-        <tr th:each="user : ${page}" th:onclick="'request(\'' + @{|/admin/users/${user.id}|}+ '\');'">
-            <td th:utext="${user.getFio()}"></td>
+        <tr th:each="user : ${page}" th:href="@{/admin/users/${user.id}}">
+            <td th:utext="|${user.getFio()}|"></td>
             <td th:utext="${user.login}"></td>
             <td th:utext="${user.email}"></td>
             <td th:utext="|${#dates.format(user.dateLastOnline,'dd.MM.yyyy HH:mm')}|"></td>
