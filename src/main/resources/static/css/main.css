@@ -1,4 +1,4 @@
-tr:hover {
+tbody > tr:hover {
     background: #eee;
     cursor: pointer;
 }

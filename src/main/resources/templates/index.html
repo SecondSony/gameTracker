@@ -12,5 +12,24 @@
             <button class="btn btn-info col-md-2" type="submit">Поиск</button>
         </form>
     </div>
+
+    <div class="container my-2">
+        <table class="table table-bordered table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th>No</th>
+                <th>Название</th>
+                <th>Ссылка</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white">
+            <tr th:each="link, iter : ${links}">
+                <td th:utext="${iter.count}"></td>
+                <td th:utext="${link.name}"></td>
+                <td><a th:href="@{${link.urlLink}}" th:utext="${link.url}"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

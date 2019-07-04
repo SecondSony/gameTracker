@@ -39,10 +39,6 @@ public class UrlWrapper implements ObjectWrapper<Url> {
 
     }
 
-    /**
-     * Записывает данные в обёртку
-     * @param item Информация о ссылке
-     */
     @Override
     public void toWrapper(Url item) {
         id = item.getId();
@@ -55,10 +51,6 @@ public class UrlWrapper implements ObjectWrapper<Url> {
         password = item.getPassword();
     }
 
-    /**
-     * Получает данные из обёртки
-     * @param item Информация о ссылке
-     */
     @Override
     public void fromWrapper(Url item) {
         item.setName(name);

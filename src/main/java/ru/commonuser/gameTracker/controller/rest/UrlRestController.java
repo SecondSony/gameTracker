@@ -36,8 +36,18 @@ public class UrlRestController {
     }
 
     @PatchMapping("/{id}/edit")
-    public void edit(@RequestBody UrlWrapper urlWrapper) throws ServersException {
+    public void edit(@Valid UrlWrapper urlWrapper) throws ServersException {
         urlService.edit(urlWrapper);
+    }
+
+    @PatchMapping("/{id}/edit_url_pattern")
+    public void editUrlPattern(Long id, String urlPattern) throws ServersException {
+        urlService.editUrlPattern(id, urlPattern);
+    }
+
+    @PatchMapping("/{id}/edit_css_pattern")
+    public void editCssPattern(Long id, String urlPattern) throws ServersException {
+        urlService.editCssPattern(id, urlPattern);
     }
 
     @DeleteMapping("/{id}/delete")

@@ -2,6 +2,7 @@ package ru.commonuser.gameTracker.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.commonuser.gameTracker.dto.LinkInfoWrapper;
 import ru.commonuser.gameTracker.dto.UrlWrapper;
 import ru.commonuser.gameTracker.entity.Url;
 import ru.commonuser.gameTracker.exception.ServersException;
@@ -55,6 +56,46 @@ public class UrlService {
         try {
             Url url = getUrl(urlWrapper.getId());
             urlWrapper.fromWrapper(url);
+            urlRepository.saveAndFlush(url);
+        } catch (ServersException ex) {
+            throw ex;
+        } catch (Exception ex){
+            throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
+        }
+    }
+
+    /**
+     * Обновляет паттерн ссылки запроса
+     *
+     * @param urlPattern паттерн ссылки
+     * @return CustomHttpObject с кодом "OK" или с кодом "ERROR" и сообщением об ошибке
+     */
+    public void editUrlPattern(Long id, String urlPattern) throws ServersException {
+        try {
+            Url url = getUrl(id);
+            UrlWrapper wrapper = new UrlWrapper();
+            url.setUrlPattern(urlPattern);
+            wrapper.toWrapper(url);
+            urlRepository.saveAndFlush(url);
+        } catch (ServersException ex) {
+            throw ex;
+        } catch (Exception ex){
+            throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
+        }
+    }
+
+    /**
+     * Обновляет паттерн ссылки запроса
+     *
+     * @param cssPattern паттерн ссылки
+     * @return CustomHttpObject с кодом "OK" или с кодом "ERROR" и сообщением об ошибке
+     */
+    public void editCssPattern(Long id, String cssPattern) throws ServersException {
+        try {
+            Url url = getUrl(id);
+            UrlWrapper wrapper = new UrlWrapper();
+            url.setCssPattern(cssPattern);
+            wrapper.toWrapper(url);
             urlRepository.saveAndFlush(url);
         } catch (ServersException ex) {
             throw ex;
@@ -125,5 +166,45 @@ public class UrlService {
         }
 
         return urlList;
+    }
+
+    // TODO:
+
+    /**
+     * Получает ссылки на файл из сайтов в базе данных
+     * @param searchName название искомого файла
+     * @return список ссылок
+     * @throws ServersException Ошибка со стороны сервера
+     */
+    public List<LinkInfoWrapper> getLinks(String searchName) throws ServersException {
+        searchName = "witcher";
+        List<LinkInfoWrapper> links = new ArrayList<>();
+        List<Url> urls = getAll();
+
+        if (urls != null && urls.size() > 0) {
+            try {
+                for (Url urlInfo : urls) {
+                    // Парсинг сайта по ссылке
+                    // - получить url-ссылку по паттерну (регулярка)
+                    // - получить html-док
+                    // - поиск элементов с href с помощью css query
+                    // - закинуть href в linkInfo
+                    // - закинуть в список
+
+                    String urlQuery = getUrlQuery(urlInfo, searchName);
+                }
+            } catch (Exception ex){
+                throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
+            }
+        }
+        
+        return links;
+    }
+
+    public String getUrlQuery(Url url, String searchName) {
+        String urlQuery = url.getUrlPattern();
+        urlQuery = urlQuery.replaceFirst("<url>", url.getUrl());
+        urlQuery = urlQuery.replaceAll("<search_name>", searchName);
+        return urlQuery;
     }
 }

@@ -12,8 +12,7 @@
         <table class="table table-bordered table-sm">
             <thead class="thead-dark">
             <tr>
-                <th>Название сайта</th>
-                <th>Ссылка</th>
+                <th>Сайт</th>
                 <th>Авторизация</th>
                 <th>Логин</th>
                 <th>Пароль</th>
@@ -21,8 +20,7 @@
             </thead>
             <tbody class="bg-white">
             <tr th:each="url : ${urls}" th:onclick="'request(\'' + @{|/admin/urls/${url.id}|}+ '\');'">
-                <td th:utext="${url.name}"></td>
-                <td><a th:href="@{${url.url}}" th:utext="${url.url}"></a></td>
+                <td><a th:href="@{${url.url}}" th:utext="${url.name}"></a></td>
                 <td th:utext="${url.isAuth}"></td>
                 <td th:utext="${url.login}"></td>
                 <td th:utext="${url.password}"></td>
