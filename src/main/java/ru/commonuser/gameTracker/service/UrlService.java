@@ -1,5 +1,9 @@
 package ru.commonuser.gameTracker.service;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.commonuser.gameTracker.dto.LinkInfoWrapper;
@@ -10,6 +14,7 @@ import ru.commonuser.gameTracker.exception.error.ErrorCodeConstants;
 import ru.commonuser.gameTracker.exception.error.ErrorInformationBuilder;
 import ru.commonuser.gameTracker.repository.UrlRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +61,26 @@ public class UrlService {
         try {
             Url url = getUrl(urlWrapper.getId());
             urlWrapper.fromWrapper(url);
+            urlRepository.saveAndFlush(url);
+        } catch (ServersException ex) {
+            throw ex;
+        } catch (Exception ex){
+            throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);
+        }
+    }
+
+    /**
+     * Обновляет паттерн ссылки запроса
+     *
+     * @param urlName паттерн ссылки
+     * @return CustomHttpObject с кодом "OK" или с кодом "ERROR" и сообщением об ошибке
+     */
+    public void editUrl(Long id, String urlName) throws ServersException {
+        try {
+            Url url = getUrl(id);
+            UrlWrapper wrapper = new UrlWrapper();
+            url.setUrl(urlName);
+            wrapper.toWrapper(url);
             urlRepository.saveAndFlush(url);
         } catch (ServersException ex) {
             throw ex;
@@ -177,7 +202,7 @@ public class UrlService {
      * @throws ServersException Ошибка со стороны сервера
      */
     public List<LinkInfoWrapper> getLinks(String searchName) throws ServersException {
-        searchName = "witcher";
+//        searchName = "http://4pda.ru";
         List<LinkInfoWrapper> links = new ArrayList<>();
         List<Url> urls = getAll();
 
@@ -191,7 +216,22 @@ public class UrlService {
                     // - закинуть href в linkInfo
                     // - закинуть в список
 
-                    String urlQuery = getUrlQuery(urlInfo, searchName);
+                    try {
+                        String urlQuery = getUrlQuery(urlInfo, searchName);
+                        Document doc = Jsoup.connect(urlQuery).get();
+                        Elements items = doc.select(urlInfo.getCssPattern());
+
+                            for (Element item : items) {
+
+                                LinkInfoWrapper w = new LinkInfoWrapper();
+                                w.setName("" + item.text());
+                                w.setUrl(urlInfo.getUrl());
+                                w.setUrlLink(item.attr("href"));
+                                links.add(w);
+                            }
+                    } catch (IOException ex) {
+
+                    }
                 }
             } catch (Exception ex){
                 throw new ServersException(ErrorInformationBuilder.build(ErrorCodeConstants.USER_ADD_ERROR), ex);

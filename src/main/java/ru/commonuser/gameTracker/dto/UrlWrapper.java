@@ -19,11 +19,9 @@ public class UrlWrapper implements ObjectWrapper<Url> {
     private String url;
 
     @NotNull
-    @Size(max = 100)
     private String urlPattern;
 
     @NotNull
-    @Size(max = 100)
     private String cssPattern;
 
     @NotNull

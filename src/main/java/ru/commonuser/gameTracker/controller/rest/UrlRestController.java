@@ -40,6 +40,11 @@ public class UrlRestController {
         urlService.edit(urlWrapper);
     }
 
+    @PatchMapping("/{id}/edit_url")
+    public void editUrl(Long id, String url) throws ServersException {
+        urlService.editUrl(id, url);
+    }
+
     @PatchMapping("/{id}/edit_url_pattern")
     public void editUrlPattern(Long id, String urlPattern) throws ServersException {
         urlService.editUrlPattern(id, urlPattern);

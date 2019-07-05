@@ -7,9 +7,9 @@
 <body class="bg-secondary">
     <header th:replace="fragments/header :: header()"></header>
     <div class="container my-2">
-        <form id="searcher" class="form-group row mx-0">
-            <input class="form-control col-md-10" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-info col-md-2" type="submit">Поиск</button>
+        <form id="searcher" class="form-group row mx-0" action="/" method="POST">
+            <input id="search-field" class="form-control col-md-10" type="search" placeholder="Search" aria-label="Search" name="searchName" th:value="${searchName}">
+            <button id="submit-btn" class="btn btn-info col-md-2" type="submit">Поиск</button>
         </form>
     </div>
 
@@ -18,15 +18,13 @@
             <thead class="thead-dark">
             <tr>
                 <th>No</th>
-                <th>Название</th>
-                <th>Ссылка</th>
+                <th>Заголовок</th>
             </tr>
             </thead>
             <tbody class="bg-white">
             <tr th:each="link, iter : ${links}">
                 <td th:utext="${iter.count}"></td>
-                <td th:utext="${link.name}"></td>
-                <td><a th:href="@{${link.urlLink}}" th:utext="${link.url}"></a></td>
+                <td><a th:href="@{${link.urlLink}}" th:utext="${link.name}"></a></td>
             </tr>
             </tbody>
         </table>

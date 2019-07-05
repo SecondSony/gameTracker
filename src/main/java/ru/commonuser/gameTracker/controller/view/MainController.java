@@ -3,6 +3,7 @@ package ru.commonuser.gameTracker.controller.view;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,9 +26,15 @@ public class MainController {
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public ModelAndView getPublicPage(Authentication authentication) throws ServersException {
+    public String getPublicPage(Authentication authentication) {
+        return "index";
+    }
+
+    @PostMapping(value = {"/", "/index"})
+    public ModelAndView getSearchPage(String searchName, Authentication authentication) throws ServersException  {
         ModelAndView page = new ModelAndView("/index");
-        page.addObject("links", urlService.getLinks("witcher"));
+        page.addObject("searchName", searchName);
+        page.addObject("links", urlService.getLinks(searchName));
         return page;
     }
 
