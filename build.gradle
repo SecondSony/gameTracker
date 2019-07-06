@@ -61,7 +61,7 @@ dependencies {
     // compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'org.springframework.boot:spring-boot-devtools:'
     compile 'org.springframework.boot:spring-boot-starter-log4j2'
-    compile 'org.jsoup:jsoup:1.7.2'
+    compile 'org.jsoup:jsoup:1.12.1'
 
     compile 'org.springframework.security:spring-security-ldap'
 

@@ -222,11 +222,14 @@ public class UrlService {
                         Elements items = doc.select(urlInfo.getCssPattern());
 
                             for (Element item : items) {
-
                                 LinkInfoWrapper w = new LinkInfoWrapper();
+                                String href = item.attr("href");
+                                if (!href.startsWith("http")) {
+                                    href = urlInfo.getUrl() + href;
+                                }
                                 w.setName("" + item.text());
                                 w.setUrl(urlInfo.getUrl());
-                                w.setUrlLink(item.attr("href"));
+                                w.setUrlLink(href);
                                 links.add(w);
                             }
                     } catch (IOException ex) {
